@@ -22,7 +22,7 @@ namespace WebbLabb2.Controllers
             return böcker.Any() ? Ok(böcker) : NotFound("Could not find any books.");
         }
 
-        [HttpGet("Böcker/{id}")]
+        [HttpGet("Böcker/{isbn}")]
         public async Task<ActionResult<Böcker>> GetBöcker(string ISBN)
         {
             var bok = await _unitOfWork.Böcker.GetBook(ISBN);
@@ -37,10 +37,10 @@ namespace WebbLabb2.Controllers
             return Ok(bok);
         }
 
-        [HttpPatch("Böcker/{id}")]
-        public async Task<ActionResult> UpdateBok(string isbn, Böcker bok)
+        [HttpPut("Böcker")]
+        public async Task<ActionResult> UpdateBok(Böcker bok)
         {
-            bool updated = await _unitOfWork.Böcker.UpdateBook(isbn, bok);
+            bool updated = await _unitOfWork.Böcker.UpdateBook(bok);
             if (updated)
             {
                 _unitOfWork.Save();
@@ -49,7 +49,7 @@ namespace WebbLabb2.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("Böcker({id}")]
+        [HttpDelete("Böcker/{isbn}")]
         public async Task<ActionResult> DeleteBok(string isbn)
         {
             var bok = await _unitOfWork.Böcker.GetBook(isbn);

@@ -13,15 +13,20 @@ namespace WebbLabb2.DAL.Repositories
             return await _context.Böckers.FirstOrDefaultAsync(b => b.Isbn13.Equals(isbn));
         }
 
-        public async Task<bool> UpdateBook(string isbn, Böcker newBook)
+        public async Task<bool> UpdateBook(Böcker newBook)
         {
-            var book =  await _context.Böckers.FirstOrDefaultAsync(b => b.Isbn13.Equals(isbn));
-            if(book is null)
+            var book = await _context.Böckers.FindAsync(newBook.Isbn13);
+            if (book is null)
             {
                 return false;
             }
-            book = newBook;
-            _context.SaveChanges();
+
+            book.Titel = newBook.Titel;
+            book.Språk = newBook.Språk;
+            book.Pris = newBook.Pris;
+            book.Utgivningsdatum = newBook.Utgivningsdatum;
+
+            _context.Böckers.Update(book);
             return true;
         }
 

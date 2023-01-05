@@ -27,14 +27,6 @@ namespace WebbLabb2.DAL.Repositories
         {
             await _context.Set<T>().AddAsync(entity);
         }
-        public async void Update(T entity, int id)
-        {
-            var test = await _context.Set<T>().FindAsync(id);
-            if (test is not null)
-            {
-                test = entity;
-            }
-        }
 
         public void Delete(T entity)
         {
