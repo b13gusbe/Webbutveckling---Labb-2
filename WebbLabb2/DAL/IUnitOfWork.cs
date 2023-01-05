@@ -6,6 +6,7 @@ namespace WebbLabb2.DAL
     {
         IBöckerRepository Böcker { get; }
         IFörfattareRepository Författare { get; }
+        IButikerRepository Butiker { get; }
         void Save();
     }
 }

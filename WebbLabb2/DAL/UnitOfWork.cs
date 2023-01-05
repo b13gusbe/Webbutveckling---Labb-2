@@ -13,10 +13,12 @@ namespace WebbLabb2.DAL
             _context = context;
             Böcker = new BöckerRepository(context);
             Författare = new FörfattareRepository(context);
+            Butiker = new ButikerRepository(context);
         }
 
         public IBöckerRepository Böcker { get; private set; }
         public IFörfattareRepository Författare { get; private set; }
+        public IButikerRepository Butiker { get; private set; }
 
         public void Save()
         {
