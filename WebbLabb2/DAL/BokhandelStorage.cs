@@ -8,7 +8,7 @@ namespace WebbLabb2.DAL
 
         public BokhandelStorage()
         {
-            _context= new BokhandelContext();
+            //_context= new BokhandelContext();
         }
 
 
