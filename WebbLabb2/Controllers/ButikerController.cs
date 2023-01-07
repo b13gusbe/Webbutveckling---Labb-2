@@ -16,7 +16,6 @@ namespace WebbLabb2.Controllers
         }
 
 
-
         [HttpGet("Butiker")]
         public async Task<ActionResult<IEnumerable<Butiker>>> GetAllButiker()
         {
@@ -63,8 +62,6 @@ namespace WebbLabb2.Controllers
             _unitOfWork.Save();
             return Ok($"Store with id {id} deleted.");
         }
-
-
 
     }
 }
