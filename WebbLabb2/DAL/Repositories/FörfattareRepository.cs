@@ -7,6 +7,8 @@ namespace WebbLabb2.DAL.Repositories
     {
         public FörfattareRepository(BokhandelContext context) : base(context) { }
 
+        //public async Task<Författare> GetFörfattare()
+
 
         public async Task<bool> UpdateFörfattare(Författare newFörfattare)
         {

@@ -18,7 +18,7 @@ namespace WebbLabb2.Controllers
         [HttpGet("Saldo")]
         public async Task<ActionResult<IEnumerable<LagerSaldo>>> GetAllSaldos()
         {
-            var lagerSaldo = await _unitOfWork.LagerSaldo.GetAll();
+            var lagerSaldo = await _unitOfWork.LagerSaldo.GetAll(null);
             return Ok(lagerSaldo);
         }
 

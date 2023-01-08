@@ -8,10 +8,16 @@ namespace WebbLabb2.DAL.Repositories
     {
         public BöckerRepository(BokhandelContext context) : base(context) { }
 
-        public async Task<Böcker> GetBook(string isbn)
-        {
-            return await _context.Böckers.FirstOrDefaultAsync(b => b.Isbn13.Equals(isbn));
-        }
+        //public async Task<Böcker> GetBook(string isbn)
+        //{
+        //    return await _context.Böckers.Where(b => b.Isbn13 == isbn).Include(f => f.Författare).FirstOrDefaultAsync();
+        //    //return await _context.Böckers.FirstOrDefaultAsync(b => b.Isbn13.Equals(isbn));
+        //}
+
+        //public async Task<IEnumerable<Böcker>> GetAllBöcker()
+        //{
+        //    return await _context.Böckers.Include(f => f.Författare).ToListAsync();
+        //}
 
         public async Task<bool> UpdateBook(Böcker newBook)
         {

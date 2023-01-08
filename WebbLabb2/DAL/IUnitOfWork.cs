@@ -8,6 +8,7 @@ namespace WebbLabb2.DAL
         IFörfattareRepository Författare { get; }
         IButikerRepository Butiker { get; }
         ILagerSaldoRepository LagerSaldo { get; }
+        IOrdrarRepository Ordrar { get; }
         void Save();
     }
 }

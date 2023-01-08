@@ -15,12 +15,14 @@ namespace WebbLabb2.DAL
             Författare = new FörfattareRepository(context);
             Butiker = new ButikerRepository(context);
             LagerSaldo = new LagerSaldoRepository(context);
+            Ordrar= new OrdrarRepository(context);
         }
 
         public IBöckerRepository Böcker { get; private set; }
         public IFörfattareRepository Författare { get; private set; }
         public IButikerRepository Butiker { get; private set; }
         public ILagerSaldoRepository LagerSaldo { get; private set; }
+        public IOrdrarRepository Ordrar { get; private set; }
 
         public void Save()
         {

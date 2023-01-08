@@ -18,16 +18,21 @@ namespace WebbLabb2.Controllers
         [HttpGet("Böcker")]
         public async Task<ActionResult<IEnumerable<Böcker>>> GetAllBöcker()
         {
-            var böcker = await _unitOfWork.Böcker.GetAll();
+            var böcker = await _unitOfWork.Böcker.GetAll(new string[] { "Författare" });
             return böcker.Any() ? Ok(böcker) : NotFound("Could not find any books.");
         }
 
         [HttpGet("Böcker/{isbn}")]
         public async Task<ActionResult<Böcker>> GetBöcker(string ISBN)
         {
-            var bok = await _unitOfWork.Böcker.GetBook(ISBN);
+            var bok = await _unitOfWork.Böcker.GetById(b => b.Isbn13 == ISBN, new string[] { "Författare", "LagerSaldos", "Ordrars" });
             return bok is not null ? Ok(bok) : NotFound("Could not find that book.");
         }
+        //public async Task<ActionResult<Böcker>> GetBöcker(string ISBN)
+        //{
+        //    var bok = await _unitOfWork.Böcker.GetBook(ISBN);
+        //    return bok is not null ? Ok(bok) : NotFound("Could not find that book.");
+        //}
 
         [HttpPost("Böcker")]
         public async Task<ActionResult> AddBok(Böcker bok)
@@ -52,7 +57,7 @@ namespace WebbLabb2.Controllers
         [HttpDelete("Böcker/{isbn}")]
         public async Task<ActionResult> DeleteBok(string isbn)
         {
-            var bok = await _unitOfWork.Böcker.GetBook(isbn);
+            var bok = await _unitOfWork.Böcker.GetById(b => b.Isbn13 == isbn, null);
             if(bok is null)
             {
                 return BadRequest("Book not found.");

@@ -19,14 +19,14 @@ namespace WebbLabb2.Controllers
         [HttpGet("Butiker")]
         public async Task<ActionResult<IEnumerable<Butiker>>> GetAllButiker()
         {
-            var butiker = await _unitOfWork.Butiker.GetAll();
+            var butiker = await _unitOfWork.Butiker.GetAll(new string[] { "LagerSaldos" });
             return butiker.Any() ? Ok(butiker) : NotFound("Could not find any stores.");
         }
 
         [HttpGet("Butiker/{id}")]
         public async Task<ActionResult<Butiker>> GetButiker(int id)
         {
-            var butik = await _unitOfWork.Butiker.GetById(id);
+            var butik = await _unitOfWork.Butiker.GetById(b => b.Id == id, new string[]{ "LagerSaldos" });
             return butik is not null ? Ok(butik) : NotFound("Could not find that store.");
         }
 
@@ -53,7 +53,7 @@ namespace WebbLabb2.Controllers
         [HttpDelete("Butiker/{id}")]
         public async Task<ActionResult> DeleteButik(int id)
         {
-            var butik = await _unitOfWork.Butiker.GetById(id);
+            var butik = await _unitOfWork.Butiker.GetById(b => b.Id == id, null);
             if (butik is null)
             {
                 return BadRequest("Store not found.");

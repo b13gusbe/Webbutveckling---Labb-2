@@ -19,14 +19,14 @@ namespace WebbLabb2.Controllers
         [HttpGet("Författare")]
         public async Task<ActionResult<IEnumerable<Böcker>>> GetAllFörfattare()
         {
-            var författare = await _unitOfWork.Författare.GetAll();
+            var författare = await _unitOfWork.Författare.GetAll(new string[] { "Böckers" });
             return författare.Any() ? Ok(författare) : NotFound("Could not find any authors.");
         }
 
         [HttpGet("Författare/{id}")]
         public async Task<ActionResult<Böcker>> GetFörfattare(int id)
         {
-            var författare = await _unitOfWork.Författare.GetById(id);
+            var författare = await _unitOfWork.Författare.GetById(f => f.Id == id, new string[] { "Böckers" });
             return författare is not null ? Ok(författare) : NotFound("Could not find that author.");
         }
 
@@ -53,7 +53,7 @@ namespace WebbLabb2.Controllers
         [HttpDelete("Författare/{id}")]
         public async Task<ActionResult> DeleteFörfattare(int id)
         {
-            var författare = await _unitOfWork.Författare.GetById(id);
+            var författare = await _unitOfWork.Författare.GetById(b => b.Id == id, null);
             if (författare is null)
             {
                 return BadRequest("Author not found.");
